@@ -9,3 +9,12 @@ services:
       - "8080:80"
     environment:
       TITLE: "Hello en vagyok a sajat"
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./data:/var/lib/mysql
+    # -v $PWD/data:/var/lib/mysql
+#  docker compose logs mysql
+# docker compose exec mysql bash
