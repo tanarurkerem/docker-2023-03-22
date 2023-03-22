@@ -14,7 +14,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - data:/var/lib/mysql
+      - ./test.sql:/docker-entrypoint-initdb.d/test.sql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
