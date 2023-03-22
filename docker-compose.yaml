@@ -14,7 +14,19 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - ./data:/var/lib/mysql
+      - data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+volumes:
+  data:
     # -v $PWD/data:/var/lib/mysql
+# docker run -ti -v ${PWD}:/host --workdir=/host ubuntu bash
+#docker run -ti -v ${PWD}:/host --workdir=/host ubuntu rm -rf data
 #  docker compose logs mysql
 # docker compose exec mysql bash
