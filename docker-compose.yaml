@@ -10,11 +10,13 @@ services:
     environment:
       TITLE: "Hello en vagyok a sajat"
   mysql:
-    image: mysql
+    build: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - ./test.sql:/docker-entrypoint-initdb.d/test.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "mysql", "-proot"]
+      timeout: 20s
+      retries: 10
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
@@ -23,6 +25,9 @@ services:
       PMA_HOST: mysql
       PMA_USER: root
       PMA_PASSWORD: root
+    depends_on:
+      mysql:
+        condition: service_healthy
 volumes:
   data:
     # -v $PWD/data:/var/lib/mysql
