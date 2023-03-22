@@ -1,0 +1,10 @@
+# docker run -d -p 8080:80 --name nginx
+# -e TITLE="Hello en vagyok a sajat" mynginx
+version: "3.8"
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      TITLE: "Hello en vagyok a sajat"
